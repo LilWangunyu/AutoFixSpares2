@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Staff Dashboard — AutoFix</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-messaging-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script defer src="staff.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>Staff Dashboard</h1>
+    <div>
+      <button class="btn ghost" onclick="logout()">Log out</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid">
+      <section class="card">
+        <h3>Orders</h3>
+        <table class="table" id="ordersTable">
+          <thead><tr><th>Customer</th><th>Item</th><th>Qty</th><th>Total</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <aside class="card">
+        <h3>Inventory</h3>
+        <div style="margin-bottom:8px">
+          <input id="invSearch" class="input" placeholder="Search inventory..." oninput="filterInv()">
+        </div>
+        <div style="max-height:420px;overflow:auto">
+          <table class="table" id="invTable"><thead><tr><th>Photo</th><th>Name</th><th>Price</th><th>Stock</th><th>Action</th></tr></thead><tbody></tbody></table>
+        </div>
+        <hr>
+        <h4>Add / Edit Item</h4>
+        <form id="itemForm" onsubmit="event.preventDefault(); saveItem();">
+          <input id="itemId" type="hidden">
+          <label class="small">Name</label><input id="itemName" class="input" required>
+          <label class="small">Category</label>
+          <select id="itemCategory" class="input"><option value="General">General</option><option value="Tires">Tires</option></select>
+          <label class="small">Size (for tires)</label><input id="itemSize" class="input">
+          <label class="small">Price (KES)</label><input id="itemPrice" type="number" class="input" required>
+          <label class="small">Stock</label><input id="itemStock" type="number" class="input" required>
+          <label class="small">Image URL (optional)</label><input id="itemImage" class="input">
+          <div style="margin-top:8px"><button class="btn" type="submit">Save Item</button></div>
+        </form>
+        <p class="small-note">You can edit stock, delete items, and add new items here.</p>
+      </aside>
+    </div>
+
+    <section class="card" style="margin-top:12px">
+      <h3>Walk-in Sales</h3>
+      <form id="walkForm" onsubmit="event.preventDefault(); recordWalkin();">
+        <label class="small">Customer Name</label><input id="walkName" class="input" required>
+        <label class="small">Phone</label><input id="walkPhone" class="input" required>
+        <label class="small">Part</label><select id="walkPart" class="input" required></select>
+        <label class="small">Quantity</label><input id="walkQty" type="number" class="input" value="1" required>
+        <div style="margin-top:8px"><button class="btn" type="submit">Record Walk-in Sale</button></div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
