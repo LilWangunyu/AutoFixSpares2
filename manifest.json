@@ -1,0 +1,12 @@
+{
+  "short_name": "AutoFix",
+  "name": "AutoFix Spare Parts",
+  "icons": [
+    { "src": "/icons/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icons/icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "theme_color": "#1f6feb",
+  "background_color": "#ffffff"
+}
