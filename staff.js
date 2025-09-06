@@ -21,7 +21,7 @@ async function initStaff(){
     // ask permission
     const p = await Notification.requestPermission();
     if (p === 'granted') {
-      const token = await messaging.getToken({ vapidKey: '<REPLACE_WITH_WEB_VAPID_KEY_FROM_FIREBASE>' });
+      const token = await messaging.getToken({ vapidKey: 'TfO_CtUX05DQL6WF3ElDrbdMryXtjNJD9255fg7F810' });
       if (token) {
         // save to deviceTokens collection with role staff
         await db.collection('deviceTokens').doc(token).set({
