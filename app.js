@@ -105,7 +105,7 @@ async function placeOrder(){
       // request permission & get token (VAPID must be set on server console)
       const permission = await Notification.requestPermission();
       if (permission === 'granted') {
-        customerToken = await messaging.getToken({ vapidKey: '<REPLACE_WITH_WEB_VAPID_KEY_FROM_FIREBASE>' });
+        customerToken = await messaging.getToken({ vapidKey: 'TfO_CtUX05DQL6WF3ElDrbdMryXtjNJD9255fg7F810' });
         console.log('customer token', customerToken);
       }
     } catch(e){ console.warn('Token error', e); }
