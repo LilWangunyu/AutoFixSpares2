@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AutoFix Spare Parts — Shop</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Firebase SDKs (compat, used for easier migration) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-messaging-compat.js"></script>
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script src="firebase-config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>AutoFix Spare Parts</h1>
+    <div>
+      <a class="btn ghost" href="login.html">Staff Login</a>
+      <a class="btn" href="staff.html" style="margin-left:8px">Staff Dashboard</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card hero">
+      <img src="https://images.unsplash.com/photo-1518133910546-b6c2fb0b13f2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=8e3b5f7f4f66f4c4f0d2f7a9f8a1b0f4" alt="shop">
+      <div>
+        <h2>Welcome to AutoFix Spare Parts</h2>
+        <p class="small">Browse parts & tyres, place orders online and download receipts in KSh.</p>
+        <div class="feature-list" style="margin-top:8px">
+          <div class="feature">Live Stock</div>
+          <div class="feature">PDF Receipt</div>
+          <div class="feature">Push Notifications</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <input id="search" class="input" placeholder="Search by name, SKU or size..." oninput="applyFilter()" />
+          </div>
+          <div style="width:240px">
+            <select id="categoryFilter" class="input" onchange="applyFilter()">
+              <option value="">All categories</option>
+              <option value="Tires">Tires</option>
+              <option value="General">General</option>
+            </select>
+          </div>
+        </div>
+
+        <h3 style="margin-top:12px">Inventory</h3>
+        <table class="table" id="inventoryTable">
+          <thead><tr><th></th><th>Name/Size</th><th>Category</th><th>Price (KSh)</th><th>Stock</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <aside class="card">
+        <h3>Place Order</h3>
+        <form id="orderForm" onsubmit="event.preventDefault(); placeOrder();">
+          <label class="small">Select item</label>
+          <select id="partSelect" class="input" required></select>
+          <label class="small">Quantity</label>
+          <input id="qty" type="number" class="input" min="1" value="1" required>
+          <label class="small">Your name</label>
+          <input id="custName" class="input" required>
+          <label class="small">Email</label>
+          <input id="custEmail" type="email" class="input" required>
+          <label class="small">Phone</label>
+          <input id="custPhone" class="input" required>
+          <label><input type="checkbox" id="notifyMe" /> Receive a browser notification when my order is ready</label>
+          <div style="margin-top:8px">
+            <button class="btn" type="submit">Submit Order</button>
+          </div>
+        </form>
+        <p class="small-note" style="margin-top:12px">You will get a downloadable receipt after placing an order.</p>
+      </aside>
+    </div>
+
+    <section style="margin-top:12px" class="card">
+      <h3>Featured items</h3>
+      <div id="featured" style="display:flex;gap:12px;flex-wrap:wrap"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="small-note">AutoFix Spare Parts • Demo</div>
+  </footer>
+</body>
+</html>
